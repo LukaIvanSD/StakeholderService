@@ -19,10 +19,13 @@ public class UserController : BaseApiController
         _userService = userService;
     }
     
+    
     [HttpGet("paged")]
-    public ActionResult<PagedResult<UserDto>> GetPaged([FromQuery] PagedRequestDto request)
+    public IActionResult GetPaged([FromQuery] PagedRequestDto request)
     {
         var result = _userService.GetPaged(request.Page, request.PageSize);
-        return Ok(result);
+        return CreateResponse(result);
     }
+    
+    
 }
