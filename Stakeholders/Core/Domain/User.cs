@@ -16,14 +16,17 @@ namespace Stakeholders.Core.Domain
         public string Email { get; private set; }
         public UserRole Role { get; private set; }
 
+        public bool IsBlocked { get; private set; } = false;
+
         public User() { }
 
-        public User(string username,string password,string email, UserRole role)
+        public User(string username,string password,string email, UserRole role, bool isBlocked)
         {
             Username = username;
             Password = password;
             Email = email;
             Role = role;
+            IsBlocked = isBlocked;
             Validate();
         }
 
@@ -42,6 +45,11 @@ namespace Stakeholders.Core.Domain
         internal bool IsAdmin()
         {
             return Role == UserRole.Administrator;
+        }
+        
+        public void ChangeIsBlocked()
+        {
+            IsBlocked = !IsBlocked;
         }
     }
 }

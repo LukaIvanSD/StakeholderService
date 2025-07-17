@@ -9,19 +9,19 @@ namespace Stakeholders.Core.UseCases
 {
     public class PersonService : IPersonSerivce
     {
-        private readonly IPersonRepository personRepository;
-        private readonly IMapper mapper;
+        private readonly IPersonRepository _personRepository;
+        private readonly IMapper _mapper;
 
         public PersonService(IPersonRepository _personRepository,IMapper _mapper)
         {
-            personRepository = _personRepository;
-            mapper = _mapper;
+            this._personRepository = _personRepository;
+            this._mapper = _mapper;
         }
         public Result<PersonDto> GetById(long id)
         {
-            var person = personRepository.GetByUserId(id);
+            var person = _personRepository.GetByUserId(id);
             if (person == null) return Result.Fail(FailureCode.NotFound);
-            return mapper.Map<PersonDto>(person);
+            return _mapper.Map<PersonDto>(person);
         }
     }
 }

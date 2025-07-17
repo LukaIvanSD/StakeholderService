@@ -25,7 +25,7 @@ namespace Stakeholders.Startup
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<IPersonSerivce, PersonService>();
-            services.AddScoped<IUnitOfWork, StakeholdersUnitOfWork>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         private static void SetupInfrastructure(IServiceCollection services)
