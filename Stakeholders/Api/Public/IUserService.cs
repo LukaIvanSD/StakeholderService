@@ -8,5 +8,7 @@ namespace Stakeholders.Api.Public;
 public interface IUserService
 {
     Result<PagedResult<UserDto>> GetPaged(int page, int pageSize);
+    
+    Result UpdateIsUserBlocked(long userId);
 
 }

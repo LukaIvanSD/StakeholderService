@@ -9,7 +9,7 @@ namespace Stakeholders.Controllers;
 
 [ApiController]
 [Route("api/users")]
-// [Authorize("administratorPolicy")]
+[Authorize("administratorPolicy")]
 public class UserController : BaseApiController
 {
     private readonly IUserService _userService;
@@ -27,5 +27,11 @@ public class UserController : BaseApiController
         return CreateResponse(result);
     }
     
-    
+    [HttpPatch("{id}/block-toggle")]
+    public IActionResult ToggleBlock(long id)
+    {
+        var result = _userService.UpdateIsUserBlocked(id);
+        return CreateResponse(result);
+    }
+
 }

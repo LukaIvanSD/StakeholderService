@@ -46,5 +46,10 @@ namespace Stakeholders.Core.Domain
         {
             return Role == UserRole.Administrator;
         }
+        
+        public void ChangeIsBlocked()
+        {
+            IsBlocked = !IsBlocked;
+        }
     }
 }
