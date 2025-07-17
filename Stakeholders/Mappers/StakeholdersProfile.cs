@@ -10,6 +10,7 @@ namespace Stakeholders.Mappers
         {
             CreateMap<AccountRegistrationDto, User>();
             CreateMap<PersonDto, Person>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
         }
     }
 }

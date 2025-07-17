@@ -1,9 +1,12 @@
-﻿namespace Stakeholders.Core.Domain.RepositoryInterfaces
+﻿using Stakeholders.Core.UseCases;
+
+namespace Stakeholders.Core.Domain.RepositoryInterfaces
 {
     public interface IUserRepository
     {
         public User Create(User user);
         public bool Exists(string email);
         public User? GetByEmail(string email);
+        PagedResult<User> GetPaged(int page, int pageSize);
     }
 }
