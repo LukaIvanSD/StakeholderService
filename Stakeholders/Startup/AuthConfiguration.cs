@@ -15,9 +15,9 @@ namespace Stakeholders.Startup
 
         private static void ConfigureAuthentication(IServiceCollection services)
         {
-            var key = Environment.GetEnvironmentVariable("JWT_KEY") ?? "oas_secret_key";
-            var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? "oas";
-            var audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? "oas-front.com";
+            var key = Environment.GetEnvironmentVariable("JWT_KEY") ?? "ultra_extra_long_super_secret_soa_key";
+            var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? "soa";
+            var audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? "soa-front.com";
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
