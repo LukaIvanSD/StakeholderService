@@ -2,7 +2,7 @@
 {
     public class AuthenticationTokenDto
     {
-        public string AccesToken { get; set; }
+        public string AccessToken { get; set; }
         public long Id { get; set; }
     }
 }
