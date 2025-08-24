@@ -13,7 +13,7 @@ namespace Stakeholders.Controllers
 
         public AuthenticationController(IAuthenticationService authenticationService)
         {
-                this.authenticationService = authenticationService;
+            this.authenticationService = authenticationService;
         }
 
         [HttpPost]

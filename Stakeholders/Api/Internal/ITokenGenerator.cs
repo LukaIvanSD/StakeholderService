@@ -7,5 +7,6 @@ namespace Stakeholders.Api.Internal
     public interface ITokenGenerator
     {
         public Result<AuthenticationTokenDto> GenerateToken(User user,long personId);
-    }
+        public Result<bool> IsTokenValid(string token);
+  }
 }
