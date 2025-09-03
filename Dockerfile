@@ -8,7 +8,7 @@ RUN dotnet restore
 
 COPY . .
 WORKDIR /src/Stakeholders
-RUN dotnet publish -c Release -o /app/publish
+RUN dotnet publish -c Debug -o /app/publish
 
 # RUNTIME STAGE
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
