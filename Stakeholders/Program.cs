@@ -7,8 +7,8 @@ using Stakeholders.GrpcsServices;
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenLocalhost(8888, o => o.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2);
-    options.ListenLocalhost(8080, o => o.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1);
+    options.ListenAnyIP(8888, o => o.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2); // gRPC
+    options.ListenAnyIP(8080, o => o.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1); // REST
 });
 
 builder.Services.AddGrpc();
@@ -38,8 +38,6 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.UseCors(corsPolicy);
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
