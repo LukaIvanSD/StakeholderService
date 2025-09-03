@@ -13,20 +13,20 @@ namespace Stakeholders.Controllers;
 public class UserController : BaseApiController
 {
     private readonly IUserService _userService;
-    
+
     public UserController(IUserService userService)
     {
         _userService = userService;
     }
-    
-    
+
+
     [HttpGet("paged")]
     public IActionResult GetPaged([FromQuery] PagedRequestDto request)
     {
         var result = _userService.GetPaged(request.Page, request.PageSize);
         return CreateResponse(result);
     }
-    
+
     [HttpPatch("{id}/block-toggle")]
     public IActionResult ToggleBlock(long id)
     {

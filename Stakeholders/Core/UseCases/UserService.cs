@@ -18,7 +18,7 @@ public class UserService : IUserService
         _userRepository = userRepository;
         _mapper = mapper;
     }
-    
+
     public Result<PagedResult<UserDto>> GetPaged(int page, int pageSize)
     {
         var pagedUsers = _userRepository.GetPaged(page, pageSize);
@@ -27,14 +27,14 @@ public class UserService : IUserService
 
         return Result.Ok(dtoResult);
     }
-    
+
     public Result UpdateIsUserBlocked(long userId)
     {
         try
         {
-            var user = _userRepository.Get(userId);   
+            var user = _userRepository.Get(userId);
 
-            if (user.Role == UserRole.Administrator)
+            if (user.Role == Core.Domain.UserRole.Administrator)
                 return Result.Fail(FailureCode.Forbidden);
 
             user.ChangeIsBlocked();

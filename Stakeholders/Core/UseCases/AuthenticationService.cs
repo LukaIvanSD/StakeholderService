@@ -10,10 +10,9 @@ using System;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
-
 namespace Stakeholders.Core.UseCases
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationService :IAuthenticationService
     {
         private readonly IUserRepository userRepository;
         private readonly IMapper mapper;
@@ -23,9 +22,14 @@ namespace Stakeholders.Core.UseCases
         public AuthenticationService(IUserRepository _userRepository, IMapper _mapper, ITokenGenerator _tokenGenerator,IPersonRepository _personRepository)
         {
             userRepository = _userRepository;
-            mapper = _mapper; 
+            mapper = _mapper;
             tokenGenerator = _tokenGenerator;
             personRepository = _personRepository;
+        }
+
+        public Result<bool> ValidateToken(string token)
+        {
+            return tokenGenerator.IsTokenValid(token);
         }
 
         public Result<AuthenticationTokenDto> Login(CredentialsDto credentialsDto)
@@ -39,7 +43,7 @@ namespace Stakeholders.Core.UseCases
         public Result<AuthenticationTokenDto> Register(AccountRegistrationDto accountDto)
         {
             User userToRegister = new User(accountDto.Username, accountDto.Password, accountDto.Email,
-                Enum.Parse<UserRole>(accountDto.Role), false);
+                Enum.Parse<Core.Domain.UserRole>(accountDto.Role), false);
             if (userToRegister.IsAdmin()) return Result.Fail(FailureCode.InvalidArgument);
             if (userRepository.Exists(userToRegister.Email)) return Result.Fail(FailureCode.NonUniqueEmail);
             try

@@ -15,7 +15,7 @@ namespace Stakeholders.Core.UseCases
         private readonly string _issuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? "soa";
         private readonly string _audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? "soa-front.com";
 
-        public Result<AuthenticationTokenDto> GenerateToken(User user,long personId)
+        public Result<AuthenticationTokenDto> GenerateToken(User user, long personId)
         {
             var authenticationResponse = new AuthenticationTokenDto();
 
@@ -29,7 +29,7 @@ namespace Stakeholders.Core.UseCases
 
             var jwt = CreateToken(claims, 60 * 24);
             authenticationResponse.Id = user.Id;
-            authenticationResponse.AccesToken = jwt;
+            authenticationResponse.AccessToken = jwt;
 
             return authenticationResponse;
         }
@@ -47,6 +47,31 @@ namespace Stakeholders.Core.UseCases
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        public Result<Boolean> IsTokenValid(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            try
+            {
+                tokenHandler.ValidateToken(token,
+                    new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
+                    },
+                    out SecurityToken validatedToken
+                );
+                return true;
+            }
+            catch(Exception x)
+            {
+                Console.WriteLine(x);
+                return false;
+            }
         }
     }
 }
