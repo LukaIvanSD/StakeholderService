@@ -18,6 +18,7 @@ namespace Stakeholders.Mappers
             CreateMap<PersonResponse, PersonDto>().ReverseMap();
             CreateMap<UsersPagedResponse, Core.UseCases.PagedResult<UserDto>>().ReverseMap();
             CreateMap<UserResponse, UserDto>().ReverseMap();
+            CreateMap<TokenDto, TokenResponse>().ReverseMap();
         }
     }
 }

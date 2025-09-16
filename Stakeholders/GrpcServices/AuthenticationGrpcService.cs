@@ -24,21 +24,23 @@ namespace Stakeholders.GrpcsServices
       this.authenticationService = authenticationService;
       _mapper = mapper;
     }
-    public override Task<ValidateTokenResponse> ValidateToken(EmptyMessage message, ServerCallContext context)
+    public override Task<TokenResponse> GetToken(EmptyMessage message, ServerCallContext context)
     {
-      Console.WriteLine("GAS");
+      Console.WriteLine("aasda");
        var authHeader = context.RequestHeaders
         .FirstOrDefault(h => h.Key.Equals("authorization", StringComparison.OrdinalIgnoreCase));
 
-    string? token = null;
+        string? token = null;
 
-    if (authHeader != null && authHeader.Value.StartsWith("Bearer "))
-    {
-        token = authHeader.Value.Substring("Bearer ".Length);
-    }
-      var result = authenticationService.ValidateToken(token);
-      return Task.FromResult(new ValidateTokenResponse() { IsValid = result.Value });
-    }
+        if (authHeader != null && authHeader.Value.StartsWith("Bearer "))
+        {
+            token = authHeader.Value.Substring("Bearer ".Length);
+        }
+          var result = authenticationService.GetToken(token);
+          Console.WriteLine(result.Value.IsValid);
+          Console.WriteLine(result.Value.Role);
+          return Task.FromResult(_mapper.Map<TokenResponse>(result.Value));
+        }
 
         public override Task<AuthenticationTokenResponse> Login(CredentialsRequest credentialsRequest,ServerCallContext context)
         {

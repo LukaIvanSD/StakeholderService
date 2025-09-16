@@ -48,7 +48,7 @@ namespace Stakeholders.Core.UseCases
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        public Result<Boolean> IsTokenValid(string token)
+        public Result<TokenDto> GetToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             try
@@ -65,12 +65,24 @@ namespace Stakeholders.Core.UseCases
                     },
                     out SecurityToken validatedToken
                 );
-                return true;
+                var jwtToken = (JwtSecurityToken)validatedToken;
+
+                var dto = new TokenDto
+                {
+                    UserId = long.Parse(jwtToken.Claims.FirstOrDefault(c => c.Type == "id")?.Value),
+                    Role = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value,
+                    PersonId = long.Parse(jwtToken.Claims.FirstOrDefault(c => c.Type == "personId")?.Value),
+                    IsValid = true
+                };
+            return Result.Ok(dto);
             }
-            catch(Exception x)
+            catch(Exception ex)
             {
-                Console.WriteLine(x);
-                return false;
+                Console.WriteLine(ex);
+               return new TokenDto
+                {
+                    IsValid = false
+                };
             }
         }
     }

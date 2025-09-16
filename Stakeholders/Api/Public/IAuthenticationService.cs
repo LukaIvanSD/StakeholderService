@@ -8,6 +8,6 @@ namespace Stakeholders.Api.Public
     {
         public Result<AuthenticationTokenDto> Login(CredentialsDto credentialsDto);
         public Result<AuthenticationTokenDto> Register(AccountRegistrationDto accountDto);
-        public Result<Boolean> ValidateToken(string token);
+        public Result<TokenDto> GetToken(string token);
     }
 }

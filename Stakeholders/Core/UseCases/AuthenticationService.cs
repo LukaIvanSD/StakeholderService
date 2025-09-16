@@ -27,9 +27,9 @@ namespace Stakeholders.Core.UseCases
             personRepository = _personRepository;
         }
 
-        public Result<bool> ValidateToken(string token)
+        public Result<TokenDto> GetToken(string token)
         {
-            return tokenGenerator.IsTokenValid(token);
+            return tokenGenerator.GetToken(token);
         }
 
         public Result<AuthenticationTokenDto> Login(CredentialsDto credentialsDto)
