@@ -17,11 +17,13 @@ namespace Stakeholders.Controllers
         }
 
         [HttpPost]
-        public ActionResult<AuthenticationTokenDto> Register([FromBody] AccountRegistrationDto accountRegistrationDto)
+        public async Task<ActionResult<AuthenticationTokenDto>> Register(
+            [FromBody] AccountRegistrationDto accountRegistrationDto)
         {
-            var result = authenticationService.Register(accountRegistrationDto);
+            var result = await authenticationService.Register(accountRegistrationDto);
             return CreateResponse(result);
         }
+
         [HttpPost("login")]
         public ActionResult<AuthenticationTokenDto> Login([FromBody] CredentialsDto credentialsDto)
         {
