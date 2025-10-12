@@ -8,5 +8,6 @@ namespace Stakeholders.Core.Domain.RepositoryInterfaces
         public User Create(User user);
         public bool Exists(string email);
         public User? GetByEmail(string email);
+        void Delete(long userId);
     }
 }

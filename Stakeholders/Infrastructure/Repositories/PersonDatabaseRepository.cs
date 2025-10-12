@@ -28,5 +28,14 @@ namespace Stakeholders.Infrastructure.Repositories
         {
             return _context.Persons.FirstOrDefault(p => p.UserId == userId);
         }
+        public void Delete(long personId)
+        {
+            var person = _context.Persons.Find(personId);
+            if (person != null)
+            {
+                _context.Persons.Remove(person);
+                _context.SaveChanges();
+            }
+        }
     }
 }

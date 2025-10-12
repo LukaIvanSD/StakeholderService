@@ -7,7 +7,7 @@ namespace Stakeholders.Api.Public
     public interface IAuthenticationService
     {
         public Result<AuthenticationTokenDto> Login(CredentialsDto credentialsDto);
-        public Result<AuthenticationTokenDto> Register(AccountRegistrationDto accountDto);
+        public Task<Result<AuthenticationTokenDto>> Register(AccountRegistrationDto accountDto);
         public Result<TokenDto> GetToken(string token);
     }
 }

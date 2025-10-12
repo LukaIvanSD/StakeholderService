@@ -48,10 +48,16 @@ namespace Stakeholders.GrpcsServices
             return Task.FromResult(_mapper.Map<AuthenticationTokenResponse>(result.Value));
         }
 
-        public override Task<AuthenticationTokenResponse> Register(AccountRegistrationRequest accountDto,ServerCallContext context)
+        public override async Task<AuthenticationTokenResponse> Register(
+            AccountRegistrationRequest accountDto,
+            ServerCallContext context)
         {
-            var result = authenticationService.Register(_mapper.Map<AccountRegistrationDto>(accountDto));
-            return Task.FromResult(_mapper.Map<AuthenticationTokenResponse>(result.Value));
+            var result = await authenticationService.Register(
+                _mapper.Map<AccountRegistrationDto>(accountDto));
+
+            return _mapper.Map<AuthenticationTokenResponse>(result.Value);
         }
+
+
     }
 }

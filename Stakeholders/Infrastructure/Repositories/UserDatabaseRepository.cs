@@ -23,6 +23,16 @@ namespace Stakeholders.Infrastructure.Repositories
         {
             return _context.Users.FirstOrDefault(user => user.Email == email);
         }
-        
+
+        public void Delete(long userId)
+        {
+            var user = _context.Users.Find(userId);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+            }
+        }
+
     }
 }
