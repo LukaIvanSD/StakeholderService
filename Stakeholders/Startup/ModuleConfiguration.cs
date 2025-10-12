@@ -22,10 +22,12 @@ namespace Stakeholders.Startup
 
         private static void SetupCore(IServiceCollection services)
         {
+            services.AddScoped<Core.UseCases.FollowerClient>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<IPersonSerivce, Core.UseCases.PersonService>();
             services.AddScoped<IUserService, Core.UseCases.UserService>();
+
         }
 
         private static void SetupInfrastructure(IServiceCollection services)

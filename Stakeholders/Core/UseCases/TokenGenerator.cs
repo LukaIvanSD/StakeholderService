@@ -11,7 +11,7 @@ namespace Stakeholders.Core.UseCases
 {
     public class TokenGenerator : ITokenGenerator
     {
-        private readonly string _key = Environment.GetEnvironmentVariable("JWT_KEY") ?? "ultra_extra_long_super_secret_soa_key";
+        private readonly string _key = "ultra_extra_long_super_secret_soa_key";
         private readonly string _issuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? "soa";
         private readonly string _audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? "soa-front.com";
 

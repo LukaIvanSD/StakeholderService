@@ -3,6 +3,7 @@
     public class FollowerClient
     {
         private readonly HttpClient _httpClient;
+        private string baseUrl = "http://follower:8000";
 
         public FollowerClient(HttpClient httpClient)
         {
@@ -13,7 +14,7 @@
             try
             {
                 var payload = new { userId = userId };
-                var response = await _httpClient.PostAsJsonAsync("http://follower:8000/addUser", payload);
+                var response = await _httpClient.PostAsJsonAsync(baseUrl + "/addUser", payload);
 
                 if (!response.IsSuccessStatusCode)
                 {

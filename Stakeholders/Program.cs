@@ -11,6 +11,7 @@ builder.WebHost.ConfigureKestrel(options =>
     options.ListenAnyIP(8080, o => o.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1); // REST
 });
 
+builder.Services.AddHttpClient();
 builder.Services.AddGrpc();
 builder.Services.AddControllers();
 builder.Services.ConfigureSwagger(builder.Configuration);
