@@ -25,5 +25,17 @@ namespace Stakeholders.Controllers
             return CreateResponse(result);
         }
 
+        [HttpPost]
+        public ActionResult UpdateProfile(PersonDto dto)
+        {
+            var result = personService.UpdateUserProfile(dto, User.UserId());
+
+            if (result.IsFailed)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     }
 }

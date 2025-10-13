@@ -19,6 +19,13 @@ namespace Stakeholders.Infrastructure.Repositories
             return person;
         }
 
+        public Person Update(Person person)
+        {
+            _context.Persons.Update(person);
+            _context.SaveChanges();
+            return person;
+        }
+
         public Person? GetById(long id)
         {
             return _context.Persons.Find(id);

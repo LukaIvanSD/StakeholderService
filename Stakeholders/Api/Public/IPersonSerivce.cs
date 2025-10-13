@@ -6,5 +6,6 @@ namespace Stakeholders.Api.Public
     public interface IPersonSerivce
     {
         public Result<PersonDto> GetById(long id);
+        public Result UpdateUserProfile(PersonDto userInfo, long userId);
     }
 }

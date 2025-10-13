@@ -26,5 +26,15 @@
             if (string.IsNullOrWhiteSpace(Name)) throw new ArgumentException("Invalid Name");
             if (string.IsNullOrWhiteSpace(Surname)) throw new ArgumentException("Invalid Surname");
         }
+
+        public void UpdateProfile(string name, string surname, string picture, string bio, string moto)
+        {
+            Name = name;
+            Surname = surname;
+            PictureBase64 = picture;
+            Bio = bio;
+            Moto = moto;
+            Validate();
+        }
     }
 }
